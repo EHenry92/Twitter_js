@@ -1,5 +1,6 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
+const bodyParser = require('body-Parser');
 const routes = require('./routes');
 const tweetBank = require('./tweetBank');
 // const path = require('path');
@@ -10,8 +11,7 @@ app.listen(3000, function ()   {
     console.log('server listening on port 3000');
 });
 
-app.use('/',routes);
-
+app.use('/', routes);
 
 
 app.set('view engine', 'html');
@@ -21,15 +21,22 @@ nunjucks.configure('views', {noCache:true});
 routes.get('/users/:name', function(req,res, next) {
   var name = req.params.name;
   var list = tweetBank.find({name: name});
-  res.render('index', {tweets: list });
+  res.render('index', {tweets: list, showForm:false});
   next();
 });
 
 routes.get('/tweets/:id', function(req,res) {
   var tweet = req.params.id;
   var list = tweetBank.find({uniqueID: tweet});
-  res.render('index', {tweets: list });
+  res.render('index', {tweets: list , showForm:true});
 });
+routes.post('/tweets', function(req, res) {
+  var name = req.body.name;
+  var text = req.body.text;
+  tweetBank.add(name, text);
+  res.redirect('/');
+});
+
 
 
 
