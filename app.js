@@ -20,8 +20,8 @@ nunjucks.configure('views', {noCache:true});
 
 routes.get('/users/:name', function(req,res) {
   var name = req.params.name;
-  var list = tweetBank.find({name:name});
-  res.render('index', {list: list });
+  var list = tweetBank.find({name: name});
+  res.render('index', {name : name, list: list });
 });
 
 
