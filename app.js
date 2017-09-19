@@ -1,6 +1,7 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const routes = require('./routes');
+const tweetBank = require('./tweetBank');
 // const path = require('path');
 const app = express();
 app.use(express.static('public'));
@@ -9,13 +10,19 @@ app.listen(3000, function ()   {
     console.log('server listening on port 3000');
 });
 
-//app.use('/',routes);
+app.use('/',routes);
 
 
 
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
 nunjucks.configure('views', {noCache:true});
+
+routes.get('/users/:name', function(req,res) {
+  var name = req.params.name;
+  var list = tweetBank.find({name:name});
+  res.render('index', {list: list });
+});
 
 
 
