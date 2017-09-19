@@ -3,20 +3,19 @@ const nunjucks = require('nunjucks');
 const routes = require('./routes');
 // const path = require('path');
 const app = express();
+app.use(express.static('public'));
 
 app.listen(3000, function ()   {
     console.log('server listening on port 3000');
 });
 
-app.use('/',routes);
+//app.use('/',routes);
 
 
 
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
 nunjucks.configure('views', {noCache:true});
-
-
 
 
 
