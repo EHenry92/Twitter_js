@@ -17,13 +17,6 @@ function find (properties) {
 module.exports = { add: add, list: list, find: find };
 
 
-// var objects = [{ 'a': 1 }, { 'b': 2 }];
-//
-// var deep = _.cloneDeep(objects);
-// console.log(typeof deep[0]);
-// console.log(typeof objects[0]);
-// // => false
-
 const randArrayEl = function(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 };
@@ -31,7 +24,8 @@ const randArrayEl = function(arr) {
 const getFakeName = function() {
   const fakeFirsts = ['Nimit', 'David', 'Shanna', 'Emily', 'Scott', 'Karen', 'Ben', 'Dan', 'Ashi', 'Kate', 'Omri', 'Gabriel', 'Joe', 'Geoff'];
   const fakeLasts = ['Hashington', 'Stackson', 'McQueue', 'OLogn', 'Ternary', 'Claujure', 'Dunderproto', 'Binder', 'Docsreader', 'Ecma'];
-  return randArrayEl(fakeFirsts) + " " + randArrayEl(fakeLasts);
+  // return randArrayEl(fakeFirsts) + " " + randArrayEl(fakeLasts);
+  return randArrayEl(fakeFirsts);
 };
 
 const getFakeTweet = function() {
@@ -44,4 +38,5 @@ for (let i = 0; i < 10; i++) {
 }
 
  console.log(data);
- console.log(find('David'));
+ // console.log(module.exports.find({name:'David'}));
+ console.log(list());
