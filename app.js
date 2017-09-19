@@ -1,5 +1,6 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
+const routes = require('./routes');
 // const path = require('path');
 const app = express();
 
@@ -7,11 +8,19 @@ app.listen(3000, function ()   {
     console.log('server listening on port 3000');
 });
 
-app.use(function (req, res, next) {
-  console.log('Time:', Date.now())
-  next()
-});
+app.use('/',routes);
 
+
+
+app.set('view engine', 'html');
+app.engine('html', nunjucks.render);
+nunjucks.configure('views', {noCache:true});
+
+
+
+
+
+/*
 app.get('/', function (req, res, next){
   const people = [{name: 'Full'}, {name:'Stacker'}, {name:"Son"}];
   res.render('index', {title: 'Hall of Fame', people: people})
@@ -42,12 +51,10 @@ var locals = {
 
 
 
+*/
 
 
 
-app.set('view engine', 'html');
-app.engine('html', nunjucks.render);
-nunjucks.configure('views', {noCache:true});
 // nunjucks.render('index.html', locals, function(err, output){
 //   console.log(output);
 // });
