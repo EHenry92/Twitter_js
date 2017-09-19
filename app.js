@@ -18,10 +18,17 @@ app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
 nunjucks.configure('views', {noCache:true});
 
-routes.get('/users/:name', function(req,res) {
+routes.get('/users/:name', function(req,res, next) {
   var name = req.params.name;
   var list = tweetBank.find({name: name});
-  res.render('index', {name : name, list: list });
+  res.render('index', {tweets: list });
+  next();
+});
+
+routes.get('/tweets/:id', function(req,res) {
+  var tweet = req.params.id;
+  var list = tweetBank.find({uniqueID: tweet});
+  res.render('index', {tweets: list });
 });
 
 

@@ -1,9 +1,12 @@
 const _ = require('lodash');
 
 var data = [];
+var counter = 1;
+var uniqueID;
 
 function add (name, content) {
-  data.push({ name: name, content: content });
+  uniqueID = 'tweet' + counter++;
+  data.push({ uniqueID: uniqueID, name: name, content: content });
 }
 
 function list () {
@@ -36,6 +39,6 @@ for (let i = 0; i < 10; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
 
- console.log(data);
+ // console.log(data);
  // console.log(module.exports.find({name:'David'}));
- console.log(list());
+ // console.log(list());
